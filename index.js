@@ -2,6 +2,20 @@ const express = require('express');
 const app = express();
 const PORT = 3000;
 
+app.use(express.json());
+app.post('/tasks',(req, res) =>{
+    const {title} = req.body;
+    if (!title || title.trim() == ""){
+        return res.status(400).json({error: "Title is required."});
+    }
+    const newTask = {
+        id: tasks.length + 1,
+        title: title,
+        done: false
+    };
+    tasks.push(newTask);
+    res.status(201).json(newTask);
+});
 let tasks = [
     {id: 1, title: "Buy the mona lisa", done: false},
     {id: 2, title: "Develop a black hole", done: false},
